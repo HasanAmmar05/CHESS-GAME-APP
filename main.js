@@ -49,7 +49,7 @@ function createBoard() {
     })
 }
 
-const allSquares = document.querySelectorAll("#gameboard .square");
+const allSquares = document.querySelectorAll(".square");
 
 allSquares.forEach(square => {
     square.addEventListener('dragstart', dragStart);
@@ -90,6 +90,19 @@ function changePlayer() {
         playerGo = "black";
         PlayerDisplay.textContent = "black";
     }
+}
+
+
+function reverseIds (){
+    const allSquares = document.querySelectorAll(".square")
+    allSquares.forEach((square, i) => square.setAttribute('square-id', 
+                                            (width * width - 1) - i ))
+}
+
+
+function revertIds () {
+    const allSquares = document.querySelectorAll(".square")
+    allSquares.forEach((square, i) => square.setAttribute('square-id', i))
 }
 
 createBoard();
