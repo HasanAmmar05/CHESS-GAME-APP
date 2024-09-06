@@ -14,9 +14,6 @@ const startPieces = [
     rook, knight, bishop, queen, king, bishop, knight, rook
 ];
 
-function createBoard() {
-    startPieces.forEach( () => {
-        const square = document.createElement('div');
-        square.classList.add('square');
-    })
-}
+
+
+createBoard();
