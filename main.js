@@ -2,6 +2,8 @@ const GameBoard = document.querySelector("#gameboard");
 const PlayerDisplay = document.querySelector("#player");
 const infoDisplay = document.querySelector("#info-display");
 const width = 8;
+let playerGo = 'black';
+PlayerDisplay.textContent = "black"
 
 const startPieces = [
     rook, knight, bishop, queen, king, bishop, knight, rook,
@@ -71,9 +73,23 @@ function dragOver (e) {
 function dragDrop(e){
     e.stopPropagation()
     const Taken = e.target.classList.contains('piece')
-
+     e.target.parentNode.append(draggedElement)
     // e.target.parentNode.append(draggedElement);
-    // e.target.removr()
+    // e.target.remove()
+    changePlayer()
+}
+
+
+function changePlayer() {
+    if (playerGo === "black"){
+        playerGo = "white";
+        PlayerDisplay.textContent = 'white'
+
+    }
+    else {
+        playerGo = "black";
+        PlayerDisplay.textContent = "black";
+    }
 }
 
 createBoard();
