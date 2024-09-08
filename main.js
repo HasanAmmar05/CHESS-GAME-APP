@@ -119,6 +119,22 @@ function checkIfValid(target) {
     console.log(targetId)
     console.log(startId)
     console.log(piece)
+
+
+    switch(piece){
+        case 'pawn' :
+            const starterRow = [8, 9, 10, 11, 12 ,13 , 14, 15];
+            if(
+            starterRow.includes(startId) && startId + width * 2 === targetId
+            || startId + width === targetId 
+            || startId + width - 1 === targetId && document.querySelector(`[square-id = "${startId + width - 1}"]`).firstChild
+            || startId + width + 1 === targetId && document.querySelector(`[square-id = "${startId + width + 1}"]`).firstChild
+            ) {
+                return true;
+            }
+
+            
+    }
 }
 
 
