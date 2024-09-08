@@ -71,9 +71,12 @@ function dragOver (e) {
 
 
 function dragDrop(e){
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
+    const correctGo = draggedElement.firstChild.classList.contains(playerGo)
     const Taken = e.target.classList.contains('piece')
      e.target.parentNode.append(draggedElement)
+    
     // e.target.parentNode.append(draggedElement);
     // e.target.remove()
     changePlayer()
@@ -82,11 +85,13 @@ function dragDrop(e){
 
 function changePlayer() {
     if (playerGo === "black"){
+        reverseIds();
         playerGo = "white";
         PlayerDisplay.textContent = 'white'
 
     }
     else {
+        revertIds();
         playerGo = "black";
         PlayerDisplay.textContent = "black";
     }
