@@ -319,6 +319,20 @@ function checkIfValid(target) {
                 ) {
                     return true;
                 }
+
+                case 'king' : 
+                if (
+                    startId + 1 == targetId ||
+                    startId - 1 == targetId ||
+                    startId + width == targetId ||
+                    startId - width == targetId ||
+                    startId + width - 1 == targetId ||
+                    startId + width + 1 == targetId ||
+                    startId - width - 1 == targetId ||
+                    startId - width + 1 == targetId 
+                ) {
+                    return true;
+                }
     }
 }
 
