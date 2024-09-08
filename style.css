@@ -31,8 +31,12 @@ path{
 .piece {
     position: relative;
     z-index: 9;
+    cursor: grab;
 }
 
+.piece:active {
+    cursor: grabbing;
+}
 
 .beige{
     background-color: rgb(110, 110, 98);
