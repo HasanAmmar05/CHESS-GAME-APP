@@ -1,60 +1,91 @@
-#gameboard {
-    width: 320px;
-    height: 320px;
-    background-color: black;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.square{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
-    width: 40px;
-    position: relative;
+    flex-direction: column;
+    background-color: #000016;
+    margin: 0;
+    min-height: 100vh;
 }
 
+header {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: rgb(47, 99, 240);
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
 
+h1 {
+    margin: 0;
+    font-size: 40px;
+}
+
+#gameboard {
+    width: 480px;
+    height: 480px;
+    background-color: #000;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    border: 2px solid #333;
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    position: relative;
+    background-color: transparent; 
+}
 
 .square svg {
-    height: 35px;
-    width: 35px;
-    margin: 5px;
-    position: relative;
-    z-index: -9;
+    height: 50px;
+    width: 50px;
+    position: absolute; 
+    z-index: 1;
 }
 
-
-path{
+path {
     position: relative;
-    z-index: -10;
+    z-index: 0;
 }
 
 .piece {
-    position: relative;
-    z-index: 9;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center piece */
     cursor: grab;
-    
+    height: 50px;
+    width: 50px;
 }
 
 .piece:active {
     cursor: grabbing;
 }
 
-.beige{
-    background-color: rgb(110, 110, 98);
-
+.beige {
+    background-color: #d8cfc4;
 }
 
 .brown {
-    background-color: rgb(169, 43, 43);
+    background-color: #8b4c39;
 }
 
 .black {
-    fill: rgb( 28, 28, 28);
+    fill: #1c1c1c;
 }
 
-.white{
-    fill: rgb(255, 255, 255);
+.white {
+    fill: #fefefe;
 }

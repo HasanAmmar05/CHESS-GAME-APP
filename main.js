@@ -88,6 +88,7 @@ function dragDrop(e) {
             targetSquare.innerHTML = ""; // Remove the opponent's piece
             targetSquare.append(draggedElement);
             changePlayer();
+            checkForWin ()
             return;
         }
 
@@ -95,12 +96,15 @@ function dragDrop(e) {
         if (valid && !targetSquare.firstChild) {
             targetSquare.append(draggedElement);
             changePlayer();
+            
+
             return;
         }
     }
 
     // Invalid move
     infoDisplay.textContent = "You cannot go here!";
+    infoDisplay.textContent.style.color = "#fff";
     setTimeout(() => infoDisplay.textContent = "", 2000);
 }
 
@@ -320,6 +324,8 @@ function checkIfValid(target) {
                     return true;
                 }
 
+                break;
+
                 case 'king' : 
                 if (
                     startId + 1 == targetId ||
@@ -359,4 +365,20 @@ function reverseIds() {
 function revertIds() {
     const allSquares = document.querySelectorAll(".square")
     allSquares.forEach((square, i) => square.setAttribute('square-id', i))
+}
+
+
+function checkForWin () {
+    const kings = Array.from(document.querySelectorAll('#king'));
+    if (!kings.some(king => king.firstChild.classList.contains('white'))) {
+        infoDisplay.innerHTML = "Black  Player Wins!";
+        const allSquares = document.querySelectorAll('.square');
+        allSquares.forEach(square => square.firstChild?.getAttribute('draggable', false))
+    }
+
+    if (!kings.some(king => king.firstChild.classList.contains('black'))) {
+        infoDisplay.innerHTML = "White  Player Wins!";
+        const allSquares = document.querySelectorAll('.square');
+        allSquares.forEach(square => square.firstChild?.getAttribute('draggable', false))
+    }
 }
