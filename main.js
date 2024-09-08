@@ -74,13 +74,49 @@ function dragOver(e) {
 }
 
 function dragDrop(e) {
-    e.preventDefault();
-    const target = e.target.classList.contains('piece') ? e.target.parentNode : e.target;
-    if (target.classList.contains('square') && draggedElement.classList.contains(playerGo)) {
-        target.appendChild(draggedElement);
-        changePlayer();
+    e.stopPropagation();
+    
+    const correctGo = draggedElement.firstChild.classList.contains(playerGo);
+    const taken = e.target.classList.contains('piece'); 
+    const valid = checkIfValid(e.target);
+    const opponentGo = playerGo === 'white' ? 'black' : 'white';
+    const takenByOpponent = e.target.firstChild?.classList.contains(opponentGo); // corrected
+    
+    if (correctGo) {
+        // must check this first
+        if (takenByOpponent && valid) {
+            e.target.parentNode.append(draggedElement);
+            e.target.remove();
+            changePlayer()
+        }
     }
+
+    if (taken && !takenByOpponent) {
+        infoDisplay.textContent = "You cannot go here!";
+        setTimeout(() => infoDisplay.textContent = "", 2000)
+
+        return
+    }
+
+    if (valid) {
+        e.target.append(draggedElement);
+        changePlayer();
+
+        return
+    }
+    
+    
 }
+
+
+
+function checkIfValid(target) {
+    const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
+    console.log(targetId)
+}
+
+
+
 
 function changePlayer() {
     if (playerGo === "black") {
