@@ -91,10 +91,12 @@ function dragDrop(e) {
         }
     }
 
+
+
     if (taken && !takenByOpponent) {
         infoDisplay.textContent = "You cannot go here!";
         setTimeout(() => infoDisplay.textContent = "", 2000)
-
+        changePlayer()
         return
     }
 
@@ -112,7 +114,11 @@ function dragDrop(e) {
 
 function checkIfValid(target) {
     const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
+    const startId = Number(startPositionId);
+    const piece = draggedElement.id;
     console.log(targetId)
+    console.log(startId)
+    console.log(piece)
 }
 
 
