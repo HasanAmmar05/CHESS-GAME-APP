@@ -75,40 +75,35 @@ function dragOver(e) {
 
 function dragDrop(e) {
     e.stopPropagation();
-    
-    const correctGo = draggedElement.firstChild.classList.contains(playerGo);
-    const taken = e.target.classList.contains('piece'); 
-    const valid = checkIfValid(e.target);
+
+    const correctGo = draggedElement.classList.contains(playerGo);
+    const targetSquare = e.target.classList.contains('square') ? e.target : e.target.parentNode; // Ensure we target the square
+    const valid = checkIfValid(targetSquare);
     const opponentGo = playerGo === 'white' ? 'black' : 'white';
-    const takenByOpponent = e.target.firstChild?.classList.contains(opponentGo); // corrected
-    
+    const takenByOpponent = targetSquare.firstChild && targetSquare.firstChild.classList.contains(opponentGo); // Correct target check
+
     if (correctGo) {
-        // must check this first
+        // Capture scenario
         if (takenByOpponent && valid) {
-            e.target.parentNode.append(draggedElement);
-            e.target.remove();
-            changePlayer()
+            targetSquare.innerHTML = ""; // Remove the opponent's piece
+            targetSquare.append(draggedElement);
+            changePlayer();
+            return;
+        }
+
+        // Regular move
+        if (valid && !targetSquare.firstChild) {
+            targetSquare.append(draggedElement);
+            changePlayer();
+            return;
         }
     }
 
-
-
-    if (taken && !takenByOpponent) {
-        infoDisplay.textContent = "You cannot go here!";
-        setTimeout(() => infoDisplay.textContent = "", 2000)
-        changePlayer()
-        return
-    }
-
-    if (valid) {
-        e.target.append(draggedElement);
-        changePlayer();
-
-        return
-    }
-    
-    
+    // Invalid move
+    infoDisplay.textContent = "You cannot go here!";
+    setTimeout(() => infoDisplay.textContent = "", 2000);
 }
+
 
 
 
